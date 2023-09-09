@@ -1,1 +1,1 @@
-# candidates 2023 (*￣▽￣)b
+# candidates 2023 ＼(￣▽￣)／
