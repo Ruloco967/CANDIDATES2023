@@ -1,0 +1,3 @@
+[submodule "code/cubemx.cmake"]
+	path = code/cubemx.cmake
+	url = https://github.com/patrislav1/cubemx.cmake
