@@ -1,10 +1,17 @@
 # todo
-- [ ] setup stm32 programming environment
-    - [ ] STM32CUBEMX ioc file generator
-        - [ ] sensor pin distribution
-    - [ ] generate cmake project
-        - [ ] test debugger with st-link or openocd utilities
+- [X] setup stm32 programming environment
+    - [X] STM32CUBEMX ioc file generator
+    - [X] generate cmake project
+        - [X] test debugger with st-link or openocd utilities
             - [ ] test GDB Dashboard
+    
+- [ ] tcs3200 sensor library
+    - [stm32 code reference](https://github.com/jaimelaborda/TCS3200_STM32F4_Library/wiki)
+
+- [ ] motor driver library
+- [ ] encoder driver library
+- [ ] lcd screen driver library
+
 
 - [ ] line following PID
     - [ ] setup motor drivers code
