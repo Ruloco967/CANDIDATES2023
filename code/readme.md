@@ -28,8 +28,8 @@ make flash
     
 - [ ] tcs3200 sensor library
     - [stm32 code reference](https://github.com/jaimelaborda/TCS3200_STM32F4_Library/wiki)
-    - [ ] test printf with uart
-    - [ ] check `HAL_TIM_IC_CaptureCallback` works on different file (new arduino?)
+    - [X] test printf with uart
+    - [X] check `HAL_TIM_IC_CaptureCallback` works on different file (new arduino?)
     - [ ] modify parameters respecting the sensor
         - [ ] prescaler: 84
         - [ ] period: 19999

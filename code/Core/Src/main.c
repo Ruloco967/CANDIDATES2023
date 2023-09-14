@@ -21,6 +21,7 @@
 #include "cmsis_os.h"
 #include "i2c.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -35,9 +36,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define IDLE   0
-#define DONE   1
-#define F_CLK  72000000UL
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -48,13 +46,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-volatile uint8_t state = IDLE;
-volatile uint8_t message[35] = {'\0'};
-volatile uint32_t T1 = 0;
-volatile uint32_t T2 = 0;
-volatile uint32_t ticks = 0;
-volatile uint16_t TIM2_OVC = 0;
-volatile uint32_t frequency = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -99,6 +90,7 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   MX_TIM2_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_IC_Start_IT(&htim2, TIM_CHANNEL_1);
@@ -163,26 +155,6 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* htim)
-{
-    if(state == IDLE)
-    {
-        T1 = TIM2->CCR1;
-        TIM2_OVC = 0;
-        state = DONE;
-    }
-    else if(state == DONE)
-    {
-        T2 = TIM2->CCR1;
-        ticks = (T2 + (TIM2_OVC * 65536)) - T1;
-        frequency = (uint32_t)(F_CLK/ticks);
-        if(frequency != 0)
-        {
-	    frequency = frequency;
-        }
-        state = IDLE;
-    }
-}
 /* USER CODE END 4 */
 
 /**
