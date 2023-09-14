@@ -119,7 +119,8 @@ int main(void)
   MX_I2C1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_IC_Start_IT(&htim2, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -369,7 +370,8 @@ void StartTask1(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    HAL_GPIO_TogglePin(LED_PCB_GPIO_Port, LED_PCB_Pin);
+    osDelay(500);
   }
   /* USER CODE END 5 */
 }

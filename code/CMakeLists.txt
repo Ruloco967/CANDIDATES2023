@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 # Possible values: openocd, pyocd, stlink, blackmagic. stlink is default
-set(CMX_DEBUGGER "openocd")
-set(OPENOCD_CFG "${CMAKE_CURRENT_SOURCE_DIR}/openocd.cfg")
+set(CMX_DEBUGGER "stlink")
+# set(OPENOCD_CFG "${CMAKE_CURRENT_SOURCE_DIR}/openocd.cfg")
 
 include(cubemx.cmake/cubemx.cmake)
 
