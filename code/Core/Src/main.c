@@ -19,6 +19,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "i2c.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -44,24 +46,6 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-I2C_HandleTypeDef hi2c1;
-
-TIM_HandleTypeDef htim2;
-
-/* Definitions for Task1 */
-osThreadId_t Task1Handle;
-const osThreadAttr_t Task1_attributes = {
-  .name = "Task1",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
-/* Definitions for Task2 */
-osThreadId_t Task2Handle;
-const osThreadAttr_t Task2_attributes = {
-  .name = "Task2",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityLow,
-};
 
 /* USER CODE BEGIN PV */
 volatile uint8_t state = IDLE;
@@ -75,10 +59,7 @@ volatile uint32_t frequency = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void StartTask1(void *argument);
-void StartTask2(void *argument);
 void MX_FREERTOS_Init(void);
->>>>>>> origin/main
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -203,43 +184,6 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* htim)
     }
 }
 /* USER CODE END 4 */
-
-/* USER CODE BEGIN Header_StartTask1 */
-/**
-  * @brief  Function implementing the Task1 thread.
-  * @param  argument: Not used
-  * @retval None
-  */
-/* USER CODE END Header_StartTask1 */
-void StartTask1(void *argument)
-{
-  /* USER CODE BEGIN 5 */
-  /* Infinite loop */
-  for(;;)
-  {
-    HAL_GPIO_TogglePin(LED_PCB_GPIO_Port, LED_PCB_Pin);
-    osDelay(500);
-  }
-  /* USER CODE END 5 */
-}
-
-/* USER CODE BEGIN Header_StartTask2 */
-/**
-* @brief Function implementing the Task2 thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_StartTask2 */
-void StartTask2(void *argument)
-{
-  /* USER CODE BEGIN StartTask2 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END StartTask2 */
-}
 
 /**
   * @brief  Period elapsed callback in non blocking mode
