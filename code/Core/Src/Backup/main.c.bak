@@ -151,6 +151,8 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+void test() {}
+
 /* USER CODE END 4 */
 
 /**
