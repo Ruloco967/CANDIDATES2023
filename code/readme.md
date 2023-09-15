@@ -43,7 +43,7 @@ make flash
 
 - [X] redirect printf to UART (check)
 
-- [ ] configure c on ide
+- [X] configure c on ide
 
 - [ ] lcd screen driver library
 - [ ] ultrasonic sensor driver library
