@@ -42,11 +42,13 @@ make flash
 - [X]  mpu6050 sensor driver library (check)
 
 - [X] redirect printf to UART (check)
-
 - [X] configure c on ide
 
-- [ ] lcd screen driver library
 - [ ] ultrasonic sensor driver library
+- [ ] servo driver library
+
+- [ ] lcd screen driver library
+
 - [ ] motor driver library
 - [ ] encoder driver library
 
