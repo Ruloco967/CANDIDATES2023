@@ -39,9 +39,14 @@ make flash
     - [ ] frequency to color conversion
     - [ ] test sensor
 
+- [ ] mpu6050 sensor driver library
+
+- [ ] redirect printf to UART
+
+- [ ] configure c on ide
+
 - [ ] lcd screen driver library
 - [ ] ultrasonic sensor driver library
-- [ ] mpu6050 sensor driver library
 - [ ] motor driver library
 - [ ] encoder driver library
 

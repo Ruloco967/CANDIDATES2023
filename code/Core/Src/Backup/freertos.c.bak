@@ -25,7 +25,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
+#include "usart.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -125,10 +126,13 @@ void MX_FREERTOS_Init(void) {
 void StartTask1(void *argument)
 {
   /* USER CODE BEGIN StartTask1 */
+  uint8_t message[35] = {'\0'};
+  sprintf(message, "testing... (task1)\r\n");
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    osDelay(400);
+    // HAL_UART_Transmit(&huart1, message, sizeof(message), 100);
   }
   /* USER CODE END StartTask1 */
 }
@@ -143,10 +147,13 @@ void StartTask1(void *argument)
 void StartTask2(void *argument)
 {
   /* USER CODE BEGIN StartTask2 */
+  uint8_t message[35] = {'\0'};
+  sprintf(message, "testing... (task1)\r\n");
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    osDelay(600);
+    // HAL_UART_Transmit(&huart1, "testing... (task2)", sizeof(message), 100);
   }
   /* USER CODE END StartTask2 */
 }
