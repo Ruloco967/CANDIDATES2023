@@ -6,6 +6,9 @@ set(CMX_DEBUGGER "stlink")
 
 include(cubemx.cmake/cubemx.cmake)
 
+# generate compile commands
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 project(testproject)
 
 add_executable(mrcheese)
