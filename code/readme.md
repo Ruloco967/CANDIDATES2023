@@ -39,9 +39,9 @@ make flash
     - [ ] frequency to color conversion
     - [ ] test sensor
 
-- [ ] mpu6050 sensor driver library
+- [X]  mpu6050 sensor driver library (check)
 
-- [ ] redirect printf to UART
+- [X] redirect printf to UART (check)
 
 - [ ] configure c on ide
 
