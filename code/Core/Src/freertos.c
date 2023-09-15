@@ -128,9 +128,7 @@ void StartTask1(void *argument)
 {
   /* USER CODE BEGIN StartTask1 */
 
-  int16_t Gx = 1;
-  int16_t Gy = 2;
-  int16_t Gz = 3;
+  int16_t Gx, Gy, Gz = 0;
 
   /* Infinite loop */
   for(;;)
@@ -139,16 +137,9 @@ void StartTask1(void *argument)
     int8_t roll = MPU6050_Roll(Gx, Gy, Gz);
     int8_t pitch = MPU6050_Pitch(Gx, Gy, Gz);
 
-    uint8_t message[60] = {'\0'};
-    sprintf(message, "roll: %d pitch: %d \r\n", roll, pitch);
-
-    HAL_UART_Transmit(&huart1, message, strlen(message), 100);
+    printf("roll: %d pitch: %d \r\n", roll, pitch);
 
     osDelay(50);
-
-    // uint8_t message2[5] = {0x1B, 0x5B, 0x32, 0x4A, '\0'};
-    // HAL_UART_Transmit(&huart1, message2, strlen(message2), 100);
-
   }
   /* USER CODE END StartTask1 */
 }
@@ -163,13 +154,10 @@ void StartTask1(void *argument)
 void StartTask2(void *argument)
 {
   /* USER CODE BEGIN StartTask2 */
-  uint8_t message[35] = {'\0'};
-  sprintf(message, "testing... (task1)\r\n");
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
-    // HAL_UART_Transmit(&huart1, "testing... (task2)", sizeof(message), 100);
   }
   /* USER CODE END StartTask2 */
 }

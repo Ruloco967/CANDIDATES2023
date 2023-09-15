@@ -16,5 +16,8 @@
 
 void MPU6050_Config (void);
 void MPU6050_Read_Accel (int16_t* Gx, int16_t* Gy, int16_t* Gz);
+int8_t MPU6050_Roll(int16_t Gx, int16_t Gy, int16_t Gz);
+int8_t MPU6050_Pitch(int16_t Gx, int16_t Gy, int16_t Gz);
+
 
 #endif

@@ -1,11 +1,10 @@
 #include "sensors/MPU6050.h"
 
 #include "i2c.h"
+#include <math.h>
 
 // https://controllerstech.com/how-to-interface-mpu6050-gy-521-with-stm32
 // https://wiki.dfrobot.com/How_to_Use_a_Three-Axis_Accelerometer_for_Tilt_Sensing
-
-const float M_PI = 3.14159265358979323846;
 
 void MPU6050_Config(void) {
     
