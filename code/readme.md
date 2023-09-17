@@ -30,10 +30,10 @@ make flash
     - [stm32 code reference](https://github.com/jaimelaborda/TCS3200_STM32F4_Library/wiki)
     - [X] test printf with uart
     - [X] check `HAL_TIM_IC_CaptureCallback` works on different file (new arduino?)
-    - [ ] modify parameters respecting the sensor
-        - [ ] prescaler: 84
-        - [ ] period: 19999
-        - [ ] filter: 5
+    - [X] modify parameters respecting the sensor
+        - [X] prescaler: 84
+        - [X] period: 19999
+        - [X] filter: 5
             - [ ] check why these numbers exactly
     - [ ] code for 4 parameters of sensor
     - [ ] frequency to color conversion

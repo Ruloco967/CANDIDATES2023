@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "usart.h"
+#include "sensors/MPU6050.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -126,13 +127,19 @@ void MX_FREERTOS_Init(void) {
 void StartTask1(void *argument)
 {
   /* USER CODE BEGIN StartTask1 */
-  uint8_t message[35] = {'\0'};
-  sprintf(message, "testing... (task1)\r\n");
+
+  int16_t Gx, Gy, Gz = 0;
+
   /* Infinite loop */
   for(;;)
   {
-    osDelay(400);
-    // HAL_UART_Transmit(&huart1, message, sizeof(message), 100);
+    MPU6050_Read_Accel (&Gx, &Gy, &Gz);
+    int8_t roll = MPU6050_Roll(Gx, Gy, Gz);
+    int8_t pitch = MPU6050_Pitch(Gx, Gy, Gz);
+
+    printf("roll: %d pitch: %d \r\n", roll, pitch);
+
+    osDelay(50);
   }
   /* USER CODE END StartTask1 */
 }
@@ -147,13 +154,10 @@ void StartTask1(void *argument)
 void StartTask2(void *argument)
 {
   /* USER CODE BEGIN StartTask2 */
-  uint8_t message[35] = {'\0'};
-  sprintf(message, "testing... (task1)\r\n");
   /* Infinite loop */
   for(;;)
   {
-    osDelay(600);
-    // HAL_UART_Transmit(&huart1, "testing... (task2)", sizeof(message), 100);
+    osDelay(1);
   }
   /* USER CODE END StartTask2 */
 }

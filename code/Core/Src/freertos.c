@@ -19,15 +19,20 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "FreeRTOS.h"
+#include "cmsis_os2.h"
 #include "task.h"
 #include "main.h"
 #include "cmsis_os.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdint.h>
 #include <stdio.h>
+#include <stdbool.h>
+
 #include "usart.h"
 #include "sensors/MPU6050.h"
+#include "sensors/TCS3200.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -137,7 +142,7 @@ void StartTask1(void *argument)
     int8_t roll = MPU6050_Roll(Gx, Gy, Gz);
     int8_t pitch = MPU6050_Pitch(Gx, Gy, Gz);
 
-    printf("roll: %d pitch: %d \r\n", roll, pitch);
+    // printf("roll: %d pitch: %d \r\n", roll, pitch);
 
     osDelay(50);
   }
@@ -155,9 +160,22 @@ void StartTask2(void *argument)
 {
   /* USER CODE BEGIN StartTask2 */
   /* Infinite loop */
+
+  TCS3200_Scaling(SCL100);
+
   for(;;)
   {
-    osDelay(1);
+    uint8_t r = TCS3200_GetColor(RED);
+    uint8_t g = TCS3200_GetColor(GREEN);
+    uint8_t b = TCS3200_GetColor(BLUE);
+
+    // uint8_t r = 1;
+    // uint8_t g = 1;
+    // uint8_t b = 1;
+
+    printf( "(%d, %d, %d) \r\n", r, g, b );
+
+    osDelay(100);
   }
   /* USER CODE END StartTask2 */
 }
