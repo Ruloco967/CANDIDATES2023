@@ -12,12 +12,12 @@
 #define DONE   1
 #define F_CLK  72000000UL
 
-#define MIN_RED 5000.0
-#define MAX_RED 16400.0
-#define MIN_GREEN 7000.0
-#define MAX_GREEN 11000.0
-#define MIN_BLUE 6000.0
-#define MAX_BLUE 10000.0
+#define MIN_RED 750000.0
+#define MAX_RED 5100000.0
+#define MIN_GREEN 700000.0
+#define MAX_GREEN 5500000.0
+#define MIN_BLUE 680000.0
+#define MAX_BLUE 5200000.0
 
 enum Scaling{SCL0, SCL2, SCL20, SCL100};
 enum Filter{RED, GREEN, BLUE, CLEAR};
@@ -32,5 +32,5 @@ extern volatile uint16_t TimeColor_High, TimeColor_Low, TimeColor;
 
 void TCS3200_Scaling(uint8_t mode);
 void TCS3200_Filter(uint8_t color);
-uint8_t TCS3200_GetColor(uint8_t color);
+uint8_t TCS3200_GetColor(enum Filter color);
 #endif

@@ -18,6 +18,12 @@ volatile uint32_t ticks = 0;
 volatile uint16_t TIM2_OVC = 0;
 volatile uint32_t frequency = 0;
 
+volatile uint32_t red_filter[] = {0, 0, 0};
+uint8_t red_counter = 0;
+
+volatile uint32_t green_filter[] = {0, 0, 0};
+volatile uint32_t blue_filter[] = {0, 0, 0};
+
 // SemaphoreHandle_t xColorReadySemaphore = NULL;
 
 _Bool mutex = false;
@@ -34,9 +40,24 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef* htim) {
         T2 = TIM2->CCR1;
         ticks = (T2 + (TIM2_OVC * 65536)) - T1;
         frequency = (uint32_t)(F_CLK/ticks);
-        if(frequency != 0)
+        if(frequency != 0 && frequency > 1999)
         {
             if (mutex == false) mutex = true;
+
+            // red_filter[2] = red_filter[1];
+            // red_filter[1] = red_filter[0];
+            // red_filter[0] = frequency;
+            // 
+            // if (red_counter > 3) {
+            //     // red_filter[0] =;
+            //
+            //     printf("%d\n\r",  ( red_filter[2] + red_filter[1] + red_filter[0] ) / 3 );
+            // } else {
+            //     // red_filter[0] = frequency;
+                printf("%d\n\r", frequency);
+            //     red_counter++;
+            // }
+
             // xSemaphoreGiveFromISR(xColorReadySemaphore, NULL);
             // if ( (IC_ColorMode == true) && (calibrate_num == 0) ) {
             //     TimeColor_Low = frequency;
@@ -114,7 +135,7 @@ uint8_t TCS3200_GetColor(enum Filter color) {
                 break;
 		
             case BLUE:
-                out_color = (255.0/(MAX_RED-MIN_BLUE))*(ready_freq-MIN_BLUE);  //MAPEAR FUNCIÓN
+                out_color = (255.0/(MAX_BLUE-MIN_BLUE))*(ready_freq-MIN_BLUE);  //MAPEAR FUNCIÓN
                 break;
 	}
 

@@ -19,7 +19,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "FreeRTOS.h"
-#include "cmsis_os2.h"
 #include "task.h"
 #include "main.h"
 #include "cmsis_os.h"
@@ -165,17 +164,19 @@ void StartTask2(void *argument)
 
   for(;;)
   {
-    uint8_t r = TCS3200_GetColor(RED);
-    uint8_t g = TCS3200_GetColor(GREEN);
-    uint8_t b = TCS3200_GetColor(BLUE);
+    TCS3200_Filter(RED);
+
+    // uint8_t r = TCS3200_GetColor(RED);
+    // uint8_t g = TCS3200_GetColor(GREEN);
+    // uint8_t b = TCS3200_GetColor(BLUE);
 
     // uint8_t r = 1;
     // uint8_t g = 1;
     // uint8_t b = 1;
 
-    printf( "(%d, %d, %d) \r\n", r, g, b );
+    // printf( "(%d, %d, %d) \r\n", r, g, b );
 
-    osDelay(100);
+    osDelay(50);
   }
   /* USER CODE END StartTask2 */
 }
