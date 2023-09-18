@@ -29,7 +29,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "usart.h"
 #include "sensors/MPU6050.h"
 #include "sensors/TCS3200.h"
 /* USER CODE END Includes */
@@ -76,6 +75,7 @@ const osThreadAttr_t Task2_attributes = {
 void StartTask1(void *argument);
 void StartTask2(void *argument);
 
+extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /**
@@ -130,6 +130,8 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartTask1 */
 void StartTask1(void *argument)
 {
+  /* init code for USB_DEVICE */
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartTask1 */
 
   int16_t Gx, Gy, Gz = 0;

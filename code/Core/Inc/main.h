@@ -57,34 +57,30 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LED_PCB_Pin GPIO_PIN_13
-#define LED_PCB_GPIO_Port GPIOC
-#define CRYSTAL_IN_Pin GPIO_PIN_0
-#define CRYSTAL_IN_GPIO_Port GPIOD
-#define CRYSTAL_OUT_Pin GPIO_PIN_1
-#define CRYSTAL_OUT_GPIO_Port GPIOD
-#define COLOR_L_Pin GPIO_PIN_0
-#define COLOR_L_GPIO_Port GPIOA
+#define LSE_IN_Pin GPIO_PIN_14
+#define LSE_IN_GPIO_Port GPIOC
+#define LSE_OUT_Pin GPIO_PIN_15
+#define LSE_OUT_GPIO_Port GPIOC
+#define HSE_IN_Pin GPIO_PIN_0
+#define HSE_IN_GPIO_Port GPIOD
+#define HSE_OUT_Pin GPIO_PIN_1
+#define HSE_OUT_GPIO_Port GPIOD
+#define TRIG_Pin GPIO_PIN_5
+#define TRIG_GPIO_Port GPIOA
+#define ECHO_L_Pin GPIO_PIN_6
+#define ECHO_L_GPIO_Port GPIOA
 #define MPU_SCL_Pin GPIO_PIN_10
 #define MPU_SCL_GPIO_Port GPIOB
 #define MPU_SDA_Pin GPIO_PIN_11
 #define MPU_SDA_GPIO_Port GPIOB
-#define S3_Pin GPIO_PIN_12
-#define S3_GPIO_Port GPIOB
-#define S2_Pin GPIO_PIN_13
-#define S2_GPIO_Port GPIOB
-#define S1_Pin GPIO_PIN_14
-#define S1_GPIO_Port GPIOB
-#define S0_Pin GPIO_PIN_15
-#define S0_GPIO_Port GPIOB
-#define COM_TX_Pin GPIO_PIN_9
-#define COM_TX_GPIO_Port GPIOA
-#define COM_RX_Pin GPIO_PIN_10
-#define COM_RX_GPIO_Port GPIOA
-#define LCD_SCL_Pin GPIO_PIN_6
-#define LCD_SCL_GPIO_Port GPIOB
-#define LCD_SDA_Pin GPIO_PIN_7
-#define LCD_SDA_GPIO_Port GPIOB
+#define COM_TX_Pin GPIO_PIN_6
+#define COM_TX_GPIO_Port GPIOB
+#define COM_RX_Pin GPIO_PIN_7
+#define COM_RX_GPIO_Port GPIOB
+#define COM_SCL_Pin GPIO_PIN_8
+#define COM_SCL_GPIO_Port GPIOB
+#define COM_SDA_Pin GPIO_PIN_9
+#define COM_SDA_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
