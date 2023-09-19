@@ -19,7 +19,7 @@ make flash
 ```
 
 ## todo
-### en orden de importancia \/ \/ \/
+### en orden de importancia \\/ \\/ \\/
 - [X] setup stm32 programming environment
     - [X] STM32CUBEMX ioc file generator
     - [X] generate cmake project
@@ -27,28 +27,16 @@ make flash
             - [ ] test GDB Dashboard
     
 - [ ] tcs3200 sensor library
-    - [stm32 code reference](https://github.com/jaimelaborda/TCS3200_STM32F4_Library/wiki)
-    - [X] test printf with uart
-    - [X] check `HAL_TIM_IC_CaptureCallback` works on different file (new arduino?)
-    - [X] modify parameters respecting the sensor
-        - [X] prescaler: 84
-        - [X] period: 19999
-        - [X] filter: 5
-            - [ ] check why these numbers exactly
-    - [ ] code for 4 parameters of sensor
-    - [ ] frequency to color conversion
-    - [ ] test sensor
-
-- [X]  mpu6050 sensor driver library (check)
+    - [ ] arduino interface
 
 - [X] redirect printf to UART (check)
 - [X] configure c on ide
 
-- [ ] ultrasonic sensor driver library
 - [ ] servo driver library
 
 - [ ] lcd screen driver library
-
+- [X] ultrasonic sensor driver library
+- [X] mpu6050 sensor driver library
 - [ ] motor driver library
 - [ ] encoder driver library
 
