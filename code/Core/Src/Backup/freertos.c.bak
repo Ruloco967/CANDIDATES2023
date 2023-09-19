@@ -29,6 +29,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#include "tim.h"
+
 #include "sensors/MPU6050.h"
 #include "sensors/TCS3200.h"
 /* USER CODE END Includes */
@@ -75,7 +77,6 @@ const osThreadAttr_t Task2_attributes = {
 void StartTask1(void *argument);
 void StartTask2(void *argument);
 
-extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /**
@@ -130,8 +131,6 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartTask1 */
 void StartTask1(void *argument)
 {
-  /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartTask1 */
 
   int16_t Gx, Gy, Gz = 0;
@@ -162,29 +161,26 @@ void StartTask2(void *argument)
   /* USER CODE BEGIN StartTask2 */
   /* Infinite loop */
 
-  TCS3200_Scaling(SCL100);
+  // uint8_t count = 0;
 
   for(;;)
   {
-    TCS3200_Filter(RED);
 
-    // uint8_t r = TCS3200_GetColor(RED);
-    // uint8_t g = TCS3200_GetColor(GREEN);
-    // uint8_t b = TCS3200_GetColor(BLUE);
+    // printf("CDC! %d\n\r", count);
+    // count++;
+    HAL_GPIO_WritePin(TRIG_GPIO_Port, TRIG_Pin, GPIO_PIN_SET);
+    // osDelay( pdMS_TO_TICKS(1) );
+    delay(10);
+    HAL_GPIO_WritePin(TRIG_GPIO_Port, TRIG_Pin, GPIO_PIN_RESET);
 
-    // uint8_t r = 1;
-    // uint8_t g = 1;
-    // uint8_t b = 1;
+    __HAL_TIM_ENABLE_IT(&htim1, TIM_IT_CC1);
+    osDelay( pdMS_TO_TICKS(200) );
 
-    // printf( "(%d, %d, %d) \r\n", r, g, b );
-
-    osDelay(50);
   }
   /* USER CODE END StartTask2 */
 }
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
-
 /* USER CODE END Application */
 
