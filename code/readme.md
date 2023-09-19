@@ -19,7 +19,7 @@ make flash
 ```
 
 ## todo
-### en orden de importancia \/ \/ \/
+### en orden de importancia \\/ \\/ \\/
 - [X] setup stm32 programming environment
     - [X] STM32CUBEMX ioc file generator
     - [X] generate cmake project
