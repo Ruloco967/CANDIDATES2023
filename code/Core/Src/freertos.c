@@ -19,8 +19,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "FreeRTOS.h"
-#include "cmsis_os2.h"
-#include "projdefs.h"
 #include "task.h"
 #include "main.h"
 #include "cmsis_os.h"

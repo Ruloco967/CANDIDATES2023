@@ -25,7 +25,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "tim.h"
+#include "sensors/TCS3200.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -60,7 +61,7 @@ const osThreadAttr_t UltrasonicTask_attributes = {
 
 /* USER CODE END FunctionPrototypes */
 
-void StartDefaultTask(void *argument);
+void StartUltrasonicTask(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -92,7 +93,7 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* creation of UltrasonicTask */
-  UltrasonicTaskHandle = osThreadNew(StartDefaultTask, NULL, &UltrasonicTask_attributes);
+  UltrasonicTaskHandle = osThreadNew(StartUltrasonicTask, NULL, &UltrasonicTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -104,22 +105,47 @@ void MX_FREERTOS_Init(void) {
 
 }
 
-/* USER CODE BEGIN Header_StartDefaultTask */
+/* USER CODE BEGIN Header_StartUltrasonicTask */
+
+const double R = 700;
+const double H = 1.00;
+volatile double Q = 10;
+volatile double P = 0;
+volatile double U_Hat = 0;
+volatile double K = 0;
+
+uint8_t kalman(uint16_t U) {
+  K = P*H / (H*P*H+R);
+  U_Hat += + K*(U-H*U_Hat);
+  P = (1-K*H)*P+Q;
+  return U_Hat;
+}
+
 /**
   * @brief  Function implementing the UltrasonicTask thread.
   * @param  argument: Not used
   * @retval None
   */
-/* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void *argument)
+/* USER CODE END Header_StartUltrasonicTask */
+void StartUltrasonicTask(void *argument)
 {
-  /* USER CODE BEGIN StartDefaultTask */
+  /* USER CODE BEGIN StartUltrasonicTask */
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    HAL_GPIO_WritePin(TRIG_GPIO_Port, TRIG_Pin, GPIO_PIN_SET);
+    
+    osDelay( pdMS_TO_TICKS(1) );
+
+    HAL_GPIO_WritePin(TRIG_GPIO_Port, TRIG_Pin, GPIO_PIN_RESET);
+
+    __HAL_TIM_ENABLE_IT(&htim1, TIM_IT_CC1);
+
+    printf("distance:%i, k-distance:%i \r\n", Distance, kalman(Distance));
+
+    osDelay( pdMS_TO_TICKS(100) ); 
   }
-  /* USER CODE END StartDefaultTask */
+  /* USER CODE END StartUltrasonicTask */
 }
 
 /* Private application code --------------------------------------------------*/

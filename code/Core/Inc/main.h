@@ -69,8 +69,14 @@ void Error_Handler(void);
 #define MPU_SCL_GPIO_Port GPIOB
 #define MPU_SDA_Pin GPIO_PIN_11
 #define MPU_SDA_GPIO_Port GPIOB
-#define TRIG_Pin GPIO_PIN_9
-#define TRIG_GPIO_Port GPIOA
+#define US_L_Pin GPIO_PIN_8
+#define US_L_GPIO_Port GPIOA
+#define US_C_Pin GPIO_PIN_9
+#define US_C_GPIO_Port GPIOA
+#define US_R_Pin GPIO_PIN_10
+#define US_R_GPIO_Port GPIOA
+#define TRIG_Pin GPIO_PIN_3
+#define TRIG_GPIO_Port GPIOB
 #define COM_SCL_Pin GPIO_PIN_8
 #define COM_SCL_GPIO_Port GPIOB
 #define COM_SDA_Pin GPIO_PIN_9
