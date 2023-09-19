@@ -29,6 +29,11 @@ make flash
 - [ ] tcs3200 sensor library
     - [ ] arduino interface
 
+- [X] redirect printf to UART (check)
+- [X] configure c on ide
+
+- [ ] servo driver library
+
 - [ ] lcd screen driver library
 - [X] ultrasonic sensor driver library
 - [X] mpu6050 sensor driver library

@@ -6,9 +6,8 @@
             "executable": "/Users/saucesaft/Developer/CANDIDATES2023/code/build/mrcheese.elf",
             "request": "attach",
             "type": "cortex-debug",
-            "servertype": "openocd",
-            "serverArgs": [],
-            "configFiles": ["/Users/saucesaft/Developer/CANDIDATES2023/code/openocd.cfg"]
+            "servertype": "stutil",
+            "v1": false
         }
     ]
 }

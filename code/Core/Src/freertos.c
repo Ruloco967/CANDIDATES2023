@@ -25,7 +25,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "tim.h"
+#include "sensors/TCS3200.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,19 +48,12 @@
 /* USER CODE BEGIN Variables */
 
 /* USER CODE END Variables */
-/* Definitions for Task1 */
-osThreadId_t Task1Handle;
-const osThreadAttr_t Task1_attributes = {
-  .name = "Task1",
+/* Definitions for UltrasonicTask */
+osThreadId_t UltrasonicTaskHandle;
+const osThreadAttr_t UltrasonicTask_attributes = {
+  .name = "UltrasonicTask",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
-};
-/* Definitions for Task2 */
-osThreadId_t Task2Handle;
-const osThreadAttr_t Task2_attributes = {
-  .name = "Task2",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityLow,
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -67,8 +61,7 @@ const osThreadAttr_t Task2_attributes = {
 
 /* USER CODE END FunctionPrototypes */
 
-void StartTask1(void *argument);
-void StartTask2(void *argument);
+void StartUltrasonicTask(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -99,11 +92,8 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* creation of Task1 */
-  Task1Handle = osThreadNew(StartTask1, NULL, &Task1_attributes);
-
-  /* creation of Task2 */
-  Task2Handle = osThreadNew(StartTask2, NULL, &Task2_attributes);
+  /* creation of UltrasonicTask */
+  UltrasonicTaskHandle = osThreadNew(StartUltrasonicTask, NULL, &UltrasonicTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -115,40 +105,47 @@ void MX_FREERTOS_Init(void) {
 
 }
 
-/* USER CODE BEGIN Header_StartTask1 */
+/* USER CODE BEGIN Header_StartUltrasonicTask */
+
+const double R = 700;
+const double H = 1.00;
+volatile double Q = 10;
+volatile double P = 0;
+volatile double U_Hat = 0;
+volatile double K = 0;
+
+uint8_t kalman(uint16_t U) {
+  K = P*H / (H*P*H+R);
+  U_Hat += + K*(U-H*U_Hat);
+  P = (1-K*H)*P+Q;
+  return U_Hat;
+}
+
 /**
-  * @brief  Function implementing the Task1 thread.
+  * @brief  Function implementing the UltrasonicTask thread.
   * @param  argument: Not used
   * @retval None
   */
-/* USER CODE END Header_StartTask1 */
-void StartTask1(void *argument)
+/* USER CODE END Header_StartUltrasonicTask */
+void StartUltrasonicTask(void *argument)
 {
-  /* USER CODE BEGIN StartTask1 */
+  /* USER CODE BEGIN StartUltrasonicTask */
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
-  }
-  /* USER CODE END StartTask1 */
-}
+    HAL_GPIO_WritePin(TRIG_GPIO_Port, TRIG_Pin, GPIO_PIN_SET);
+    
+    osDelay( pdMS_TO_TICKS(1) );
 
-/* USER CODE BEGIN Header_StartTask2 */
-/**
-* @brief Function implementing the Task2 thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_StartTask2 */
-void StartTask2(void *argument)
-{
-  /* USER CODE BEGIN StartTask2 */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
+    HAL_GPIO_WritePin(TRIG_GPIO_Port, TRIG_Pin, GPIO_PIN_RESET);
+
+    __HAL_TIM_ENABLE_IT(&htim1, TIM_IT_CC1);
+
+    printf("distance:%i, k-distance:%i \r\n", Distance, kalman(Distance));
+
+    osDelay( pdMS_TO_TICKS(100) ); 
   }
-  /* USER CODE END StartTask2 */
+  /* USER CODE END StartUltrasonicTask */
 }
 
 /* Private application code --------------------------------------------------*/
