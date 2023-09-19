@@ -27,21 +27,11 @@ make flash
             - [ ] test GDB Dashboard
     
 - [ ] tcs3200 sensor library
-    - [stm32 code reference](https://github.com/jaimelaborda/TCS3200_STM32F4_Library/wiki)
-    - [ ] test printf with uart
-    - [ ] check `HAL_TIM_IC_CaptureCallback` works on different file (new arduino?)
-    - [ ] modify parameters respecting the sensor
-        - [ ] prescaler: 84
-        - [ ] period: 19999
-        - [ ] filter: 5
-            - [ ] check why these numbers exactly
-    - [ ] code for 4 parameters of sensor
-    - [ ] frequency to color conversion
-    - [ ] test sensor
+    - [ ] arduino interface
 
 - [ ] lcd screen driver library
-- [ ] ultrasonic sensor driver library
-- [ ] mpu6050 sensor driver library
+- [X] ultrasonic sensor driver library
+- [X] mpu6050 sensor driver library
 - [ ] motor driver library
 - [ ] encoder driver library
 
